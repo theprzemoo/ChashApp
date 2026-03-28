@@ -4,7 +4,7 @@ Modern desktop encryption app built with **C#** and **Avalonia UI**.
 
 ChashApp lets you encrypt **files, folders, and notes** with a clean dark interface, multilingual UI, operation history, export tools, CLI support, and a Windows installer. The project was built as a portfolio-ready desktop product with real publish, packaging, and release flow.
 
-![ChashApp preview](./docs/chashapp-preview.svg)
+![Main UI](./docs/screenshot-main.png)
 
 ## Overview
 
