@@ -1,0 +1,37 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" rx="32" fill="#071019"/>
+  <rect x="36" y="36" width="1368" height="104" rx="28" fill="#142332" stroke="#2DF0D0"/>
+  <text x="76" y="92" fill="#F4FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">ChashApp</text>
+  <text x="76" y="122" fill="#93A8BA" font-family="Segoe UI, Arial, sans-serif" font-size="17">Cross-platform secure encryption for files and notes.</text>
+  <rect x="36" y="168" width="396" height="54" rx="18" fill="#102031"/>
+  <rect x="448" y="168" width="396" height="54" rx="18" fill="#102031"/>
+  <rect x="860" y="168" width="396" height="54" rx="18" fill="#102031"/>
+  <text x="74" y="202" fill="#F4FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">File Encryption</text>
+  <text x="486" y="202" fill="#F4FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">Note Encryption</text>
+  <text x="898" y="202" fill="#F4FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="20">History</text>
+  <rect x="36" y="250" width="840" height="564" rx="28" fill="#142332" stroke="#294357"/>
+  <rect x="904" y="250" width="500" height="180" rx="28" fill="#142332" stroke="#294357"/>
+  <rect x="904" y="450" width="500" height="180" rx="28" fill="#142332" stroke="#294357"/>
+  <rect x="904" y="650" width="500" height="164" rx="28" fill="#142332" stroke="#294357"/>
+  <text x="74" y="302" fill="#F4FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Batch-secure your files</text>
+  <text x="74" y="340" fill="#93A8BA" font-family="Segoe UI, Arial, sans-serif" font-size="18">AES-256-GCM, PBKDF2-SHA256, history tracking and bilingual UI.</text>
+  <rect x="74" y="382" width="764" height="200" rx="18" fill="#08121C"/>
+  <text x="100" y="430" fill="#C8DBEA" font-family="Consolas, monospace" font-size="20">contract.pdf</text>
+  <text x="100" y="466" fill="#C8DBEA" font-family="Consolas, monospace" font-size="20">invoice.xlsx</text>
+  <text x="100" y="502" fill="#C8DBEA" font-family="Consolas, monospace" font-size="20">private-notes.txt</text>
+  <rect x="74" y="616" width="320" height="58" rx="18" fill="#102031"/>
+  <rect x="412" y="616" width="188" height="58" rx="18" fill="#2DF0D0"/>
+  <rect x="618" y="616" width="188" height="58" rx="18" fill="#223042"/>
+  <text x="130" y="653" fill="#F4FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="22">Choose files</text>
+  <text x="461" y="653" fill="#071019" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Encrypt</text>
+  <text x="654" y="653" fill="#F4FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="22">Decrypt</text>
+  <rect x="74" y="706" width="764" height="14" rx="7" fill="#163046"/>
+  <rect x="74" y="706" width="522" height="14" rx="7" fill="#2DF0D0"/>
+  <text x="74" y="760" fill="#93A8BA" font-family="Segoe UI, Arial, sans-serif" font-size="18">Status: Files encrypted successfully.</text>
+  <text x="942" y="302" fill="#F4FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Security stack</text>
+  <text x="942" y="340" fill="#93A8BA" font-family="Segoe UI, Arial, sans-serif" font-size="18">Authenticated encryption and audit-friendly exports.</text>
+  <text x="942" y="502" fill="#F4FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Note workspace</text>
+  <text x="942" y="540" fill="#93A8BA" font-family="Segoe UI, Arial, sans-serif" font-size="18">Encrypt, decrypt and save note payloads.</text>
+  <text x="942" y="702" fill="#F4FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">History exports</text>
+  <text x="942" y="740" fill="#93A8BA" font-family="Segoe UI, Arial, sans-serif" font-size="18">JSON and CSV exports for portfolio demos.</text>
+</svg>

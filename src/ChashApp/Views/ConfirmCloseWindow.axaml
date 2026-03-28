@@ -1,0 +1,22 @@
+﻿<Window
+    x:Class="ChashApp.Views.ConfirmCloseWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:CompileBindings="False"
+    Width="420"
+    Height="220"
+    WindowStartupLocation="CenterOwner"
+    CanResize="False"
+    ExtendClientAreaToDecorationsHint="False"
+    Title="Confirm Close">
+  <Border Background="#0E1822" Padding="24">
+    <Grid RowDefinitions="Auto,*,Auto">
+      <TextBlock Text="{Binding TitleText}" FontSize="24" FontWeight="Bold" />
+      <TextBlock Grid.Row="1" Margin="0,16,0,0" Text="{Binding MessageText}" TextWrapping="Wrap" />
+      <StackPanel Grid.Row="2" Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="12">
+        <Button Content="{Binding CancelText}" Click="CancelClick" Classes="ghost" />
+        <Button Content="{Binding ConfirmText}" Click="ConfirmClick" Classes="primary" />
+      </StackPanel>
+    </Grid>
+  </Border>
+</Window>

@@ -1,0 +1,522 @@
+﻿<Window
+    x:Class="ChashApp.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:ChashApp.ViewModels"
+    xmlns:conv="using:ChashApp.Converters"
+    xmlns:dd="using:Avalonia.Input"
+    mc:Ignorable="d"
+    x:DataType="vm:MainWindowViewModel"
+    Width="1240"
+    Height="860"
+    MinWidth="860"
+    MinHeight="680"
+    ExtendClientAreaToDecorationsHint="True"
+    ExtendClientAreaChromeHints="NoChrome"
+    Title="{Binding AppTitle}">
+  <Window.Resources>
+    <conv:BooleanNegationConverter x:Key="BooleanNegationConverter" />
+  </Window.Resources>
+  <Border Classes="shell" Margin="14" BorderBrush="{Binding AccentPreviewHex}">
+    <Grid>
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="14">
+      <Border x:Name="TitleBarArea" Classes="titleBar" Grid.Row="0">
+        <Grid ColumnDefinitions="Auto,*,Auto">
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <Border Width="40" Height="40" CornerRadius="14" Background="#122131" BorderBrush="{Binding AccentPreviewHex}" BorderThickness="1">
+              <TextBlock Text="C" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="{Binding AccentPreviewHex}" />
+            </Border>
+            <StackPanel Spacing="2" VerticalAlignment="Center">
+              <TextBlock Text="{Binding AppTitle}" Classes="brandMark" />
+              <TextBlock Text="{Binding AppShellSubtitle}" Classes="brandSubtle" />
+            </StackPanel>
+          </StackPanel>
+
+          <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10">
+            <Button Width="42" Height="36" Classes="ghost" Click="MinimizeWindow">
+              <Path Width="14" Height="14" Stretch="Uniform" Fill="{Binding AccentPreviewHex}" Data="M 2 10 L 12 10 L 12 12 L 2 12 Z" />
+            </Button>
+            <Button Width="42" Height="36" Classes="ghost" Click="MaximizeWindow">
+              <Path Width="14" Height="14" Stretch="Uniform" Fill="{Binding AccentPreviewHex}" Data="M 1 1 L 13 1 L 13 13 L 1 13 Z M 3 3 L 11 3 L 11 11 L 3 11 Z" />
+            </Button>
+            <Button Width="42" Height="36" Click="CloseWindow" Background="#26131A" BorderBrush="#7B3144">
+              <Path Width="14" Height="14" Stretch="Uniform" Fill="#F39AAE" Data="M 2 3.4 L 3.4 2 L 7 5.6 L 10.6 2 L 12 3.4 L 8.4 7 L 12 10.6 L 10.6 12 L 7 8.4 L 3.4 12 L 2 10.6 L 5.6 7 Z" />
+            </Button>
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}" Grid.Row="1" Margin="0,18,0,0" HorizontalAlignment="Center" MaxWidth="1760">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Spacing="8" HorizontalAlignment="Stretch" Margin="0,0,28,0">
+            <TextBlock Text="{Binding AppTitle}" FontSize="34" FontWeight="Bold" />
+            <TextBlock Text="{Binding AppSubtitle}" Classes="muted" TextWrapping="Wrap" HorizontalAlignment="Stretch" />
+            <WrapPanel Margin="0,8,0,0">
+              <Border Classes="badge" Margin="0,0,10,10" BorderBrush="{Binding AccentPreviewHex}">
+                <TextBlock Text="AES-GCM" Classes="badgeText" />
+              </Border>
+              <Border Classes="badge" Margin="0,0,10,10">
+                <TextBlock Text="Local-only" Classes="badgeText" />
+              </Border>
+              <Border Classes="badge" Margin="0,0,10,10">
+                <TextBlock Text="Windows / Linux / macOS" Classes="badgeText" />
+              </Border>
+              <Border Classes="badge" Margin="0,0,10,10">
+                <TextBlock Text="PL / EN / ES / DE" Classes="badgeText" />
+              </Border>
+            </WrapPanel>
+          </StackPanel>
+
+          <StackPanel Grid.Column="1" Spacing="12" HorizontalAlignment="Right">
+            <TextBlock Text="{Binding LanguageLabel}" Classes="muted" />
+            <ComboBox Width="240" MinWidth="180" MaxWidth="320"
+                      ItemsSource="{Binding AvailableLanguages}"
+                      SelectedValueBinding="{Binding Key}"
+                      SelectedValue="{Binding SelectedLanguage}">
+              <ComboBox.ItemTemplate>
+                <DataTemplate>
+                  <TextBlock Text="{Binding Label}" />
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Border Classes="badge" BorderBrush="{Binding AccentPreviewHex}">
+              <StackPanel Spacing="2">
+                <TextBlock Text="Release-ready desktop app" Classes="badgeText" />
+                <TextBlock Text="Installer, history, export, modern UI" Classes="muted" />
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <ScrollViewer Grid.Row="2" Margin="0,24,0,20" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+      <Grid HorizontalAlignment="Center" MaxWidth="1760">
+      <TabControl>
+      <TabItem Header="{Binding FilesTab}">
+        <Grid Margin="8" ColumnDefinitions="1.3*,0.9*" RowDefinitions="Auto,Auto,Auto,*">
+          <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}" Grid.Column="0" Grid.RowSpan="4">
+            <StackPanel Spacing="18">
+              <TextBlock Text="{Binding FilesIntro}" Classes="sectionTitle" />
+              <TextBlock Text="{Binding SelectedFilesLabel}" Classes="muted" />
+              <Border Background="#08121C" CornerRadius="16" Padding="20" MinHeight="180">
+                <ScrollViewer MaxHeight="260">
+                  <StackPanel Spacing="10">
+                    <TextBlock Text="{Binding DropHint}" Classes="muted" TextWrapping="Wrap" />
+                    <TextBlock Text="{Binding SelectedFilesDisplay}" TextWrapping="Wrap" />
+                  </StackPanel>
+                </ScrollViewer>
+              </Border>
+
+              <TextBlock Text="{Binding PasswordLabel}" Classes="muted" />
+              <TextBox Text="{Binding FilePassword, Mode=TwoWay}" />
+              <TextBlock Text="{Binding SelectedFolderLabel}" Classes="muted" />
+              <Border Background="#08121C" CornerRadius="16" Padding="20">
+                <TextBlock Text="{Binding SelectedFolderDisplay}" TextWrapping="Wrap" />
+              </Border>
+              <TextBlock Text="{Binding KdfLabel}" Classes="muted" />
+              <ComboBox ItemsSource="{Binding AvailableKdfs}"
+                        SelectedValueBinding="{Binding Key}"
+                        SelectedValue="{Binding SelectedKdfKey}"
+                        ToolTip.Tip="{Binding KdfHint}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding Label}" />
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+              <TextBlock Text="{Binding PasswordStrengthText}" Classes="muted" />
+              <Grid ColumnDefinitions="*,*,*,*,*">
+                <Border Height="10" Margin="0,0,6,0" Grid.Column="0" Background="{Binding PasswordStrengthSegment1}" CornerRadius="999" BorderBrush="{Binding AccentPreviewHex}" BorderThickness="1" />
+                <Border Height="10" Margin="2,0,4,0" Grid.Column="1" Background="{Binding PasswordStrengthSegment2}" CornerRadius="999" BorderBrush="{Binding AccentPreviewHex}" BorderThickness="1" />
+                <Border Height="10" Margin="3,0" Grid.Column="2" Background="{Binding PasswordStrengthSegment3}" CornerRadius="999" BorderBrush="{Binding AccentPreviewHex}" BorderThickness="1" />
+                <Border Height="10" Margin="4,0,2,0" Grid.Column="3" Background="{Binding PasswordStrengthSegment4}" CornerRadius="999" BorderBrush="{Binding AccentPreviewHex}" BorderThickness="1" />
+                <Border Height="10" Margin="6,0,0,0" Grid.Column="4" Background="{Binding PasswordStrengthSegment5}" CornerRadius="999" BorderBrush="{Binding AccentPreviewHex}" BorderThickness="1" />
+              </Grid>
+
+              <WrapPanel Orientation="Horizontal">
+                <Button MinWidth="150" Margin="0,0,10,10" Content="{Binding SelectFilesLabel}" Command="{Binding SelectFilesCommand}" Classes="ghost" />
+                <Button MinWidth="150" Margin="0,0,10,10" Content="{Binding SelectFolderLabel}" Command="{Binding SelectFolderCommand}" Classes="ghost" />
+                <Button MinWidth="150" Margin="0,0,10,10" Content="{Binding EncryptLabel}" Command="{Binding EncryptFilesCommand}" Classes="primary" ToolTip.Tip="{Binding ActionRequiresPasswordHint}" />
+                <Button MinWidth="170" Margin="0,0,10,10" Content="{Binding EncryptFolderLabel}" Command="{Binding EncryptFolderCommand}" Classes="primary" ToolTip.Tip="{Binding ActionRequiresPasswordHint}" />
+                <Button MinWidth="150" Margin="0,0,10,10" Content="{Binding DecryptLabel}" Command="{Binding DecryptFilesCommand}" ToolTip.Tip="{Binding ActionRequiresPasswordHint}" />
+                <Button MinWidth="150" Margin="0,0,10,10" Content="{Binding IntegrityLabel}" Command="{Binding VerifyFilesCommand}" Classes="ghost" ToolTip.Tip="{Binding ActionRequiresPasswordHint}" />
+                <Button MinWidth="170" Margin="0,0,10,10" Content="{Binding SecureEraseActionLabel}" Click="SecureEraseClick" Classes="ghost" IsEnabled="{Binding IsSecureEraseAvailable}" />
+              </WrapPanel>
+            </StackPanel>
+          </Border>
+
+          <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}" Grid.Column="1" Grid.Row="0" Margin="16,0,0,0">
+            <StackPanel Spacing="12">
+              <TextBlock Text="{Binding SecurityStackTitle}" Classes="sectionTitle" />
+              <TextBlock Text="{Binding SecurityStackBody}" Classes="muted" TextWrapping="Wrap" />
+            </StackPanel>
+          </Border>
+
+          <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}" Grid.Column="1" Grid.Row="1" Margin="16,16,0,0">
+            <StackPanel Spacing="12">
+              <TextBlock Text="{Binding RecentFilesLabel}" Classes="sectionTitle" />
+              <Grid ColumnDefinitions="*,*" Margin="0,0,0,8">
+                <Border Classes="badge" Margin="0,0,8,0" BorderBrush="{Binding AccentPreviewHex}">
+                  <StackPanel Spacing="2">
+                    <TextBlock Text="{Binding RecentItemsMetric}" Classes="badgeText" />
+                    <TextBlock Text="Recent items" Classes="muted" />
+                  </StackPanel>
+                </Border>
+                <Border Classes="badge" Margin="8,0,0,0">
+                  <StackPanel Spacing="2">
+                    <TextBlock Text="{Binding TotalOperationsMetric}" Classes="badgeText" />
+                    <TextBlock Text="Tracked actions" Classes="muted" />
+                  </StackPanel>
+                </Border>
+              </Grid>
+              <ItemsControl ItemsSource="{Binding RecentItems}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <Border Classes="badge" Margin="0,0,0,8">
+                      <StackPanel Spacing="2">
+                        <TextBlock Text="{Binding DisplayName}" TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding Action}" Classes="muted" />
+                      </StackPanel>
+                    </Border>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </StackPanel>
+          </Border>
+
+          <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}" Grid.Column="1" Grid.Row="2" Margin="16,16,0,0">
+            <StackPanel Spacing="12">
+              <TextBlock Text="{Binding ProgressTitle}" Classes="sectionTitle" />
+                <ProgressBar Minimum="0" Maximum="100" Value="{Binding ProgressValue}" Height="14" />
+                <Grid ColumnDefinitions="Auto,*">
+                  <TextBlock Text="{Binding ProgressValue, StringFormat={}{0:F0}%}" Classes="muted" />
+                  <TextBlock Grid.Column="1" Margin="12,0,0,0" Text="{Binding StatusMessage}" Classes="muted" TextWrapping="Wrap" />
+                </Grid>
+                <WrapPanel>
+                  <Button Content="{Binding OpenOutputFolderLabel}" Command="{Binding OpenOutputFolderCommand}" Classes="ghost" MinWidth="180" IsEnabled="{Binding CanOpenOutputFolder}" Margin="0,0,10,10" />
+                  <Button Content="{Binding OpenOutputFileLabel}" Command="{Binding OpenOutputFileCommand}" Classes="ghost" MinWidth="180" IsEnabled="{Binding CanOpenOutputFile}" Margin="0,0,10,10" />
+                  <Button Content="{Binding CopyPathLabel}" Command="{Binding CopyOutputPathCommand}" Classes="ghost" MinWidth="150" IsEnabled="{Binding CanCopyOutputPath}" Margin="0,0,10,10" />
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+          <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}" Grid.Column="1" Grid.Row="3" Margin="16,16,0,0">
+            <StackPanel Spacing="8">
+              <TextBlock Text="{Binding QuickActionsLabel}" Classes="sectionTitle" />
+              <TextBlock Text="Operational snapshot of the current workspace." Classes="muted" TextWrapping="Wrap" />
+              <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" Margin="0,6,0,0">
+                <Border Classes="badge" Margin="0,0,8,8" BorderBrush="{Binding AccentPreviewHex}">
+                  <StackPanel Spacing="4">
+                    <TextBlock Text="{Binding SuccessOperationsMetric}" Classes="metric" Foreground="{Binding AccentPreviewHex}" />
+                    <TextBlock Text="Successful operations" Classes="muted" />
+                  </StackPanel>
+                </Border>
+                <Border Classes="badge" Grid.Column="1" Margin="8,0,0,8">
+                  <StackPanel Spacing="4">
+                    <TextBlock Text="{Binding FailedOperationsMetric}" Classes="metric" Foreground="#F39AAE" />
+                    <TextBlock Text="Failed operations" Classes="muted" />
+                  </StackPanel>
+                </Border>
+                <Border Classes="badge" Grid.Row="1" Margin="0,8,8,0">
+                  <StackPanel Spacing="4">
+                    <TextBlock Text="{Binding QuickMetricCipher}" Classes="metric" Foreground="{Binding AccentPreviewHex}" />
+                    <TextBlock Text="Cipher stack" Classes="muted" />
+                  </StackPanel>
+                </Border>
+                <Border Classes="badge" Grid.Row="1" Grid.Column="1" Margin="8,8,0,0">
+                  <StackPanel Spacing="4">
+                    <TextBlock Text="{Binding QuickMetricHistory}" Classes="metric" Foreground="{Binding AccentPreviewHex}" />
+                    <TextBlock Text="Export format" Classes="muted" />
+                  </StackPanel>
+                </Border>
+              </Grid>
+            </StackPanel>
+          </Border>
+        </Grid>
+      </TabItem>
+
+      <TabItem Header="{Binding NotesTab}">
+        <Grid Margin="8" ColumnDefinitions="1*,1*">
+          <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}">
+            <StackPanel Spacing="14">
+              <TextBlock Text="{Binding NotesIntro}" Classes="sectionTitle" />
+              <TextBlock Text="{Binding PasswordLabel}" Classes="muted" />
+              <TextBox Text="{Binding NotePassword, Mode=TwoWay}" />
+              <TextBlock Text="{Binding KdfLabel}" Classes="muted" />
+              <ComboBox ItemsSource="{Binding AvailableKdfs}"
+                        SelectedValueBinding="{Binding Key}"
+                        SelectedValue="{Binding SelectedKdfKey}"
+                        ToolTip.Tip="{Binding KdfHint}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding Label}" />
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+              <TextBlock Text="{Binding NoteInputLabel}" Classes="muted" />
+              <TextBox Text="{Binding NoteInput, Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="340" />
+              <WrapPanel Orientation="Horizontal">
+                <Button MinWidth="150" Margin="0,0,10,10" Content="{Binding EncryptLabel}" Command="{Binding EncryptNoteCommand}" Classes="primary" ToolTip.Tip="{Binding ActionRequiresPasswordHint}" />
+                <Button MinWidth="150" Margin="0,0,10,10" Content="{Binding DecryptLabel}" Command="{Binding DecryptNoteCommand}" ToolTip.Tip="{Binding ActionRequiresPasswordHint}" />
+                <Button MinWidth="150" Margin="0,0,10,10" Content="{Binding SaveNoteLabel}" Command="{Binding SaveNoteCommand}" Classes="ghost" />
+                <Button MinWidth="150" Margin="0,0,10,10" Content="{Binding CopyNoteLabel}" Command="{Binding CopyNoteOutputCommand}" />
+              </WrapPanel>
+              <TextBlock Text="{Binding StatusMessage}" Classes="muted" TextWrapping="Wrap" />
+            </StackPanel>
+          </Border>
+
+          <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}" Grid.Column="1" Margin="16,0,0,0">
+            <StackPanel Spacing="14">
+              <TextBlock Text="{Binding NoteOutputLabel}" Classes="sectionTitle" />
+              <TextBlock Text="{Binding NotesPreviewHint}" Classes="muted" TextWrapping="Wrap" />
+              <TextBox Text="{Binding NoteOutput}" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="520" />
+            </StackPanel>
+          </Border>
+        </Grid>
+      </TabItem>
+
+      <TabItem Header="{Binding HistoryTab}">
+        <Grid Margin="8" RowDefinitions="Auto,*,Auto">
+          <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}" Grid.Row="0">
+            <Grid ColumnDefinitions="*,Auto">
+              <StackPanel Spacing="8">
+                <TextBlock Text="{Binding HistoryIntro}" Classes="sectionTitle" />
+                <TextBlock Text="{Binding HistoryStatus}" Classes="muted" TextWrapping="Wrap" />
+                <WrapPanel Margin="0,4,0,0">
+                  <Border Classes="badge" Margin="0,0,10,10" BorderBrush="{Binding AccentPreviewHex}">
+                    <StackPanel Spacing="2">
+                      <TextBlock Text="{Binding TotalOperationsMetric}" Classes="badgeText" />
+                      <TextBlock Text="Total" Classes="muted" />
+                    </StackPanel>
+                  </Border>
+                  <Border Classes="badge" Margin="0,0,10,10">
+                    <StackPanel Spacing="2">
+                      <TextBlock Text="{Binding SuccessOperationsMetric}" Classes="badgeText" />
+                      <TextBlock Text="Success" Classes="muted" />
+                    </StackPanel>
+                  </Border>
+                  <Border Classes="badge" Margin="0,0,10,10">
+                    <StackPanel Spacing="2">
+                      <TextBlock Text="{Binding FailedOperationsMetric}" Classes="badgeText" />
+                      <TextBlock Text="Failed" Classes="muted" />
+                    </StackPanel>
+                  </Border>
+                </WrapPanel>
+                <TextBox MinWidth="180" MaxWidth="320" Width="260" Text="{Binding HistorySearch, Mode=TwoWay}" Watermark="{Binding HistorySearchLabel}" />
+              </StackPanel>
+
+              <WrapPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button MinWidth="150" Margin="0,0,10,10" Content="{Binding ExportJsonLabel}" Command="{Binding ExportHistoryJsonCommand}" Classes="ghost" />
+                <Button MinWidth="150" Margin="0,0,10,10" Content="{Binding ExportCsvLabel}" Command="{Binding ExportHistoryCsvCommand}" />
+                <Button MinWidth="150" Margin="0,0,10,10" Content="{Binding ClearHistoryLabel}" Command="{Binding ClearHistoryCommand}" Classes="ghost" />
+              </WrapPanel>
+            </Grid>
+          </Border>
+
+            <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}" Grid.Row="1" Margin="0,16,0,0">
+            <StackPanel Spacing="12">
+            <Border Classes="badge" IsVisible="{Binding HasHistoryEntries, Converter={StaticResource BooleanNegationConverter}}">
+              <TextBlock Text="{Binding HistoryEmptyState}" Classes="muted" TextWrapping="Wrap" />
+            </Border>
+            <ScrollViewer MinHeight="260" MaxHeight="520">
+              <ItemsControl ItemsSource="{Binding VisibleHistoryEntries}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <Border Classes="historyEntry" Margin="0,0,0,12">
+                      <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                        <StackPanel Grid.Column="0" Spacing="8" Margin="4,0,12,0">
+                          <TextBlock Text="{Binding DisplayTarget}"
+                                     FontSize="18"
+                                     FontWeight="SemiBold"
+                                     MaxWidth="980"
+                                     TextTrimming="CharacterEllipsis"
+                                     ToolTip.Tip="{Binding Target}" />
+                        </StackPanel>
+
+                        <Button Grid.Column="1"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Content="Open"
+                                Classes="ghost"
+                                Click="OpenHistoryEntryClick"
+                                CommandParameter="{Binding}"
+                                MinWidth="96"
+                                Margin="24,2,0,0" />
+
+                        <Border Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Margin="4,14,4,0"
+                                Padding="2,0">
+                          <TextBlock Text="{Binding Message}"
+                                     TextWrapping="NoWrap"
+                                     MaxWidth="1120"
+                                     TextTrimming="CharacterEllipsis"
+                                     ToolTip.Tip="{Binding Message}" />
+                        </Border>
+
+                        <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="4,16,4,0">
+                          <Border Classes="badge" Padding="10,4" Margin="0,0,10,8">
+                            <TextBlock Text="{Binding DisplayTimestamp}" Classes="badgeText" />
+                          </Border>
+                          <Border Classes="badge" Padding="10,4" Margin="0,0,10,8">
+                            <TextBlock Text="{Binding Category}" Classes="badgeText" />
+                          </Border>
+                          <Border Classes="badge" Padding="10,4" Margin="0,0,10,8">
+                            <TextBlock Text="{Binding Action}" Classes="badgeText" />
+                          </Border>
+                          <Border Padding="10,4"
+                                  Margin="0,0,10,8"
+                                  CornerRadius="999"
+                                  Background="#122131"
+                                  BorderBrush="{Binding StatusBorderHex}"
+                                  BorderThickness="1">
+                            <TextBlock Text="{Binding StatusLabel}" Foreground="{Binding StatusForegroundHex}" />
+                          </Border>
+                          <Border Classes="badge" Padding="10,4" Margin="0,0,10,8" MaxWidth="320">
+                            <TextBlock Text="{Binding Algorithm}" Classes="badgeText" TextTrimming="CharacterEllipsis" MaxWidth="280" />
+                          </Border>
+                        </WrapPanel>
+                      </Grid>
+                    </Border>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </ScrollViewer>
+            </StackPanel>
+            </Border>
+
+          <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}" Grid.Row="2" Margin="0,16,0,0">
+            <Grid ColumnDefinitions="Auto,Auto,Auto,*">
+              <Button Content="{Binding PreviousPageLabel}" Command="{Binding PreviousHistoryPageCommand}" Classes="ghost" />
+              <TextBlock Grid.Column="1" Margin="12,0,0,0" Text="{Binding CurrentPageLabel}" VerticalAlignment="Center" />
+              <ComboBox Grid.Column="2" Margin="12,0,0,0" Width="90" ItemsSource="{Binding PageSizes}" SelectedItem="{Binding PageSize}" />
+              <Button Grid.Column="3" HorizontalAlignment="Right" Content="{Binding NextPageLabel}" Command="{Binding NextHistoryPageCommand}" />
+            </Grid>
+          </Border>
+        </Grid>
+      </TabItem>
+
+      <TabItem Header="{Binding SettingsTab}">
+        <Grid Margin="8" ColumnDefinitions="1.1*,0.9*">
+          <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}">
+            <StackPanel Spacing="14">
+              <TextBlock Text="{Binding SettingsIntro}" Classes="sectionTitle" />
+              <TextBlock Text="{Binding LanguageLabel}" Classes="muted" />
+              <ComboBox Width="240" MinWidth="180" MaxWidth="320"
+                        ItemsSource="{Binding AvailableLanguages}"
+                        SelectedValueBinding="{Binding Key}"
+                        SelectedValue="{Binding SelectedLanguage}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding Label}" />
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+
+              <TextBlock Text="{Binding KdfLabel}" Classes="muted" />
+              <ComboBox Width="240" MinWidth="180" MaxWidth="320"
+                        ItemsSource="{Binding AvailableKdfs}"
+                        SelectedValueBinding="{Binding Key}"
+                        SelectedValue="{Binding SelectedKdfKey}"
+                        ToolTip.Tip="{Binding KdfHint}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding Label}" />
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+
+              <TextBlock Text="{Binding AccentLabel}" Classes="muted" />
+              <ComboBox Width="240" MinWidth="180" MaxWidth="320"
+                        ItemsSource="{Binding AvailableAccentPresets}"
+                        SelectedValueBinding="{Binding Key}"
+                        SelectedValue="{Binding AccentColor}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                      <Border Width="16" Height="16" CornerRadius="8" Background="{Binding Hex}" />
+                      <TextBlock Text="{Binding Label}" />
+                    </StackPanel>
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+              <Border Width="240" MinWidth="180" Height="18" CornerRadius="9" Background="{Binding AccentPreviewHex}" />
+
+              <CheckBox Content="{Binding SaveHistoryLabel}" IsChecked="{Binding SaveHistoryOnExit}" />
+              <CheckBox Content="{Binding UseAcrylicLabel}" IsChecked="{Binding UseAcrylic}" />
+              <CheckBox Content="{Binding SecureDeleteLabel}" IsChecked="{Binding SecureDeleteAfterProcessing}" />
+              <CheckBox Content="{Binding PrivacyModeLabel}" IsChecked="{Binding PrivacyModeEnabled}" />
+              <TextBlock Text="{Binding AutoLockLabel}" Classes="muted" />
+              <TextBox Width="240" MinWidth="180" MaxWidth="320" Text="{Binding AutoLockMinutes, Mode=TwoWay}" />
+
+              <Button Content="{Binding SaveSettingsLabel}" Command="{Binding SaveSettingsCommand}" Classes="primary" Width="240" MinWidth="180" MaxWidth="320" Background="{Binding AccentPreviewHex}" BorderBrush="{Binding AccentPreviewHex}" />
+              <Button Content="{Binding ResetSettingsLabel}" Command="{Binding ResetSettingsCommand}" Width="240" MinWidth="180" MaxWidth="320" Classes="ghost" />
+              <Button Content="{Binding UninstallAppLabel}" Width="240" MinWidth="180" MaxWidth="320" Classes="ghost" Click="UninstallAppClick" />
+            </StackPanel>
+          </Border>
+
+          <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}" Grid.Column="1" Margin="16,0,0,0">
+            <StackPanel Spacing="14">
+              <TextBlock Text="{Binding ReleasePrepTitle}" Classes="sectionTitle" />
+              <TextBlock Text="{Binding ReleasePrepBody}" Classes="muted" TextWrapping="Wrap" />
+              <TextBlock Text="{Binding PortableModeHint}" Classes="muted" TextWrapping="Wrap" />
+              <TextBlock Text="{Binding PrivacyHint}" Classes="muted" TextWrapping="Wrap" />
+              <TextBlock Text="{Binding RecoveryHint}" Classes="muted" TextWrapping="Wrap" />
+              <TextBlock Text="{Binding SettingsStatusLabel}" Classes="muted" />
+              <TextBlock Text="{Binding SettingsStatus}" TextWrapping="Wrap" />
+            </StackPanel>
+          </Border>
+        </Grid>
+      </TabItem>
+      <TabItem Header="{Binding AboutTab}">
+        <Grid Margin="8" ColumnDefinitions="1*,1*">
+          <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}">
+            <StackPanel Spacing="14">
+              <TextBlock Text="{Binding AboutTitle}" Classes="sectionTitle" />
+              <TextBlock Text="{Binding AboutBody}" Classes="muted" TextWrapping="Wrap" />
+            </StackPanel>
+          </Border>
+          <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}" Grid.Column="1" Margin="16,0,0,0">
+            <StackPanel Spacing="14">
+              <TextBlock Text="{Binding AboutHowTitle}" Classes="sectionTitle" />
+              <TextBlock Text="{Binding AboutHowBody}" Classes="muted" TextWrapping="Wrap" />
+              <TextBlock Text="{Binding AboutPrivacyTitle}" Classes="sectionTitle" />
+              <TextBlock Text="{Binding AboutPrivacyBody}" Classes="muted" TextWrapping="Wrap" />
+              <TextBlock Text="{Binding PanicHint}" Classes="muted" TextWrapping="Wrap" />
+            </StackPanel>
+          </Border>
+        </Grid>
+      </TabItem>
+      </TabControl>
+      </Grid>
+      </ScrollViewer>
+
+      <Border Classes="hero" BorderBrush="{Binding AccentPreviewHex}" Grid.Row="3" Padding="18,14" HorizontalAlignment="Center" MaxWidth="1760">
+        <Grid ColumnDefinitions="Auto,*">
+          <TextBlock Text="{Binding StatusLabel}" Classes="muted" VerticalAlignment="Center" />
+          <TextBlock Grid.Column="1" Margin="12,0,0,0" Text="{Binding StatusMessage}" VerticalAlignment="Center" TextWrapping="Wrap" />
+        </Grid>
+      </Border>
+      </Grid>
+      <ItemsControl ItemsSource="{Binding Toasts}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,18,18,0" IsHitTestVisible="False">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <Border Width="320" Margin="0,0,0,10" Padding="14,12" CornerRadius="16" Background="{Binding BackgroundHex}" BorderBrush="{Binding BorderHex}" BorderThickness="1" BoxShadow="0 18 40 0 #4A000000">
+              <StackPanel Spacing="4">
+                <TextBlock Text="{Binding Title}" FontWeight="SemiBold" />
+                <TextBlock Text="{Binding Message}" Classes="muted" TextWrapping="Wrap" />
+              </StackPanel>
+            </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </Grid>
+    </Border>
+  </Window>
+
+
+
+
+

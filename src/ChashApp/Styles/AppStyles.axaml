@@ -1,0 +1,232 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Style Selector="Window">
+    <Setter Property="Background">
+      <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#08111B" Offset="0" />
+        <GradientStop Color="#101B29" Offset="0.45" />
+        <GradientStop Color="#152638" Offset="1" />
+      </LinearGradientBrush>
+    </Setter>
+    <Setter Property="TransparencyLevelHint" Value="AcrylicBlur" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <BrushTransition Property="Background" Duration="0:0:0.35" />
+      </Transitions>
+    </Setter>
+  </Style>
+
+  <Style Selector="Border.shell">
+    <Setter Property="Background" Value="#09131E" />
+    <Setter Property="BorderBrush" Value="#1D3142" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="24" />
+    <Setter Property="BoxShadow" Value="0 28 80 0 #5A000000" />
+  </Style>
+
+  <Style Selector="Border.titleBar">
+    <Setter Property="Background" Value="#0D1824" />
+    <Setter Property="BorderBrush" Value="#1D3142" />
+    <Setter Property="BorderThickness" Value="0,0,0,1" />
+    <Setter Property="Padding" Value="18,12" />
+  </Style>
+
+  <Style Selector="Border.hero">
+    <Setter Property="Background" Value="#141E2ABF" />
+    <Setter Property="BorderBrush" Value="#2DF0D0" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="24" />
+    <Setter Property="Padding" Value="24" />
+    <Setter Property="BoxShadow" Value="0 24 64 0 #66000000" />
+    <Setter Property="RenderTransformOrigin" Value="50%,50%" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Opacity" Duration="0:0:0.28" />
+        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.20" />
+        <BrushTransition Property="BorderBrush" Duration="0:0:0.20" />
+      </Transitions>
+    </Setter>
+  </Style>
+
+  <Style Selector="Border.hero:pointerover">
+    <Setter Property="RenderTransform" Value="translate(0,-2px)" />
+    <Setter Property="BorderBrush" Value="#7CF5E1" />
+  </Style>
+
+  <Style Selector="Border.badge">
+    <Setter Property="Background" Value="#102031" />
+    <Setter Property="BorderBrush" Value="#284154" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="999" />
+    <Setter Property="Padding" Value="12,8" />
+  </Style>
+
+  <Style Selector="Border.historyEntry">
+    <Setter Property="Background" Value="#102031" />
+    <Setter Property="BorderBrush" Value="#2DF0D0" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="22" />
+    <Setter Property="Padding" Value="22,20" />
+  </Style>
+
+  <Style Selector="Button">
+    <Setter Property="CornerRadius" Value="14" />
+    <Setter Property="Padding" Value="18,12" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="Background" Value="#223042" />
+    <Setter Property="BorderBrush" Value="#2A435A" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="RenderTransformOrigin" Value="50%,50%" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.18" />
+        <BrushTransition Property="Background" Duration="0:0:0.18" />
+        <BrushTransition Property="BorderBrush" Duration="0:0:0.18" />
+      </Transitions>
+    </Setter>
+  </Style>
+
+  <Style Selector="Button:pointerover">
+    <Setter Property="Background" Value="#2B4057" />
+    <Setter Property="BorderBrush" Value="#4E6985" />
+    <Setter Property="RenderTransform" Value="scale(1.015)" />
+  </Style>
+
+  <Style Selector="Button:pressed">
+    <Setter Property="RenderTransform" Value="scale(0.985)" />
+  </Style>
+
+  <Style Selector="Button.primary">
+    <Setter Property="Background" Value="#2DF0D0" />
+    <Setter Property="Foreground" Value="#061017" />
+    <Setter Property="BorderBrush" Value="#2DF0D0" />
+  </Style>
+
+  <Style Selector="Button.primary:pointerover">
+    <Setter Property="Background" Value="#69F5E0" />
+    <Setter Property="BorderBrush" Value="#69F5E0" />
+  </Style>
+
+  <Style Selector="Button.ghost">
+    <Setter Property="Background" Value="#122131" />
+    <Setter Property="BorderBrush" Value="#2A435A" />
+  </Style>
+
+  <Style Selector="TextBox, ComboBox">
+    <Setter Property="Background" Value="#102031" />
+    <Setter Property="BorderBrush" Value="#294357" />
+    <Setter Property="Foreground" Value="#ECF7FF" />
+    <Setter Property="CornerRadius" Value="14" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <BrushTransition Property="BorderBrush" Duration="0:0:0.18" />
+        <BrushTransition Property="Background" Duration="0:0:0.18" />
+      </Transitions>
+    </Setter>
+  </Style>
+
+  <Style Selector="TextBox:pointerover, ComboBox:pointerover">
+    <Setter Property="BorderBrush" Value="#43627B" />
+    <Setter Property="Background" Value="#132536" />
+  </Style>
+
+  <Style Selector="TextBox:focus, ComboBox:focus">
+    <Setter Property="BorderBrush" Value="#2DF0D0" />
+  </Style>
+
+  <Style Selector="TabControl">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+
+  <Style Selector="TabItem">
+    <Setter Property="Background" Value="#102031" />
+    <Setter Property="BorderBrush" Value="#294357" />
+    <Setter Property="CornerRadius" Value="14,14,0,0" />
+    <Setter Property="Margin" Value="0,0,8,0" />
+    <Setter Property="Padding" Value="18,10" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <BrushTransition Property="Background" Duration="0:0:0.18" />
+        <BrushTransition Property="BorderBrush" Duration="0:0:0.18" />
+        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.18" />
+      </Transitions>
+    </Setter>
+  </Style>
+
+  <Style Selector="TabItem:pointerover">
+    <Setter Property="Background" Value="#153147" />
+    <Setter Property="RenderTransform" Value="translate(0,-1px)" />
+  </Style>
+
+  <Style Selector="TabItem:selected">
+    <Setter Property="Background" Value="#18344B" />
+    <Setter Property="BorderBrush" Value="#2DF0D0" />
+  </Style>
+
+  <Style Selector="ProgressBar">
+    <Setter Property="MinHeight" Value="12" />
+    <Setter Property="Background" Value="#163046" />
+    <Setter Property="Foreground" Value="#2DF0D0" />
+    <Setter Property="CornerRadius" Value="999" />
+  </Style>
+
+  <Style Selector="DataGrid">
+    <Setter Property="Background" Value="#0E1B29AA" />
+    <Setter Property="BorderBrush" Value="#2A435A" />
+    <Setter Property="RowBackground" Value="#0D1824" />
+    <Setter Property="Foreground" Value="#ECF7FF" />
+  </Style>
+
+  <Style Selector="DataGridCell">
+    <Setter Property="BorderBrush" Value="#1A2B3A" />
+    <Setter Property="Foreground" Value="#ECF7FF" />
+  </Style>
+
+  <Style Selector="DataGridRow">
+    <Setter Property="Foreground" Value="#ECF7FF" />
+    <Setter Property="Background" Value="#0D1824" />
+  </Style>
+
+  <Style Selector="DataGridRow:pointerover">
+    <Setter Property="Background" Value="#132536" />
+  </Style>
+
+  <Style Selector="DataGridColumnHeader">
+    <Setter Property="Background" Value="#122131" />
+    <Setter Property="Foreground" Value="#D9F7F0" />
+    <Setter Property="BorderBrush" Value="#294357" />
+  </Style>
+
+  <Style Selector="TextBlock.sectionTitle">
+    <Setter Property="FontSize" Value="22" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="Foreground" Value="#F4FBFF" />
+  </Style>
+
+  <Style Selector="TextBlock.muted">
+    <Setter Property="Foreground" Value="#9FB5C7" />
+  </Style>
+
+  <Style Selector="TextBlock.metric">
+    <Setter Property="FontSize" Value="28" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="Foreground" Value="#2DF0D0" />
+  </Style>
+
+  <Style Selector="TextBlock.brandMark">
+    <Setter Property="FontSize" Value="18" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="Foreground" Value="#F4FBFF" />
+  </Style>
+
+  <Style Selector="TextBlock.brandSubtle">
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="Foreground" Value="#9FB5C7" />
+  </Style>
+
+  <Style Selector="TextBlock.badgeText">
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="Foreground" Value="#D9F7F0" />
+  </Style>
+</Styles>

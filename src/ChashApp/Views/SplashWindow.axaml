@@ -1,0 +1,27 @@
+<Window
+    x:Class="ChashApp.Views.SplashWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Width="560"
+    Height="320"
+    CanResize="False"
+    SystemDecorations="None"
+    WindowStartupLocation="CenterScreen"
+    Background="#08111B">
+  <Border Padding="28" BorderBrush="#2DF0D0" BorderThickness="1" CornerRadius="24" Background="#111C28" BoxShadow="0 24 56 0 #68000000">
+    <Grid RowDefinitions="*,Auto">
+      <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="18">
+        <Border Width="96" Height="96" CornerRadius="28" Background="#0D1824" BorderBrush="#2DF0D0" BorderThickness="1">
+          <Image Width="84" Height="84" Source="/Assets/chashapp-icon.png" />
+        </Border>
+        <TextBlock Text="ChashApp" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" />
+        <TextBlock Text="Secure startup workspace" Classes="muted" HorizontalAlignment="Center" />
+      </StackPanel>
+
+      <StackPanel Grid.Row="1" Spacing="10">
+        <ProgressBar IsIndeterminate="True" Height="10" />
+        <TextBlock Text="Preparing encryption workspace..." Classes="muted" HorizontalAlignment="Center" />
+      </StackPanel>
+    </Grid>
+  </Border>
+</Window>
